@@ -47,6 +47,7 @@ module StatefulEnum
     class EventDrawer < ::StatefulEnum::Machine::Event
       def initialize(g, states, prefix, suffix, name, &block)
         @g, @states, @prefix, @suffix, @name = g, states, prefix, suffix, name
+        @before, @after = [], []
 
         instance_eval(&block) if block
       end
