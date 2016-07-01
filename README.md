@@ -138,7 +138,7 @@ Note that you need to bundle the ruby-graphviz gem (and its dependencies) for th
 
 ## Support Rails Versions
 
-* Rails 4.1.x, 4.2.x, and 5.0 (edge)
+* Rails 4.1.x, 4.2.x, 5.0, and 5.1 (edge)
 
 
 ## Contributing
