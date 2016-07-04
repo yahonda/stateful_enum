@@ -1,6 +1,9 @@
 language: ruby
 
+sudo: false
+
 cache:
+  - apt
   - bundler
 
 rvm:
@@ -13,8 +16,10 @@ gemfile:
   - gemfiles/Gemfile-rails.4.2.x
   - gemfiles/Gemfile-rails.5.0.0
 
-before_install:
- - sudo apt-get install graphviz
+addons:
+  apt:
+    packages:
+      - graphviz
 
 matrix:
   allow_failures:
