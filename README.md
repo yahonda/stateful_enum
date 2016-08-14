@@ -131,6 +131,12 @@ Note that you need to bundle the ruby-graphviz gem (and its dependencies) for th
 % rails g stateful_enum:graph bug
 ```
 
+You can specify relative or absolute output path via environment variable `DEST_DIR`.
+
+```bash
+% DEST_DIR=doc rails g stateful_enum:graph bug
+```
+
 ## TODO
 
 * Better Error handling

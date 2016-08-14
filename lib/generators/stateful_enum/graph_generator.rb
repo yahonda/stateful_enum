@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails/generators/named_base'
-require 'stateful_enum/config_file'
 
 module StatefulEnum
   module Generators
@@ -40,14 +39,7 @@ module StatefulEnum
           @g.get_node(final) {|n| n['shape'] = 'doublecircle' }
         end
 
-        configuration = StatefulEnum::ConfigFile.load
-        filename = if configuration['output_path'].nil?
-                    "#{model.name}.png"
-                  else
-                    File.join(configuration['output_path'], "#{model.name}.png")
-                  end
-
-        @g.output png: filename
+        @g.output png: File.join((ENV['DEST_DIR'] || Dir.pwd), "#{model.name}.png")
       end
 
       def event(name, &block)
