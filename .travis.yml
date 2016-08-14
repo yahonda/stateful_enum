@@ -11,13 +11,6 @@ rvm:
   - 2.3.1
   - ruby-head
 
-matrix:
-  exclude:
-    - rvm: ruby-head
-      gemfile: gemfiles/Gemfile-rails.4.1.x
-    - rvm: ruby-head
-      gemfile: gemfiles/Gemfile-rails.4.2.x
-
 gemfile:
   - gemfiles/Gemfile-rails.4.1.x
   - gemfiles/Gemfile-rails.4.2.x
@@ -29,5 +22,10 @@ addons:
       - graphviz
 
 matrix:
+  exclude:
+    - rvm: ruby-head
+      gemfile: gemfiles/Gemfile-rails.4.1.x
+    - rvm: ruby-head
+      gemfile: gemfiles/Gemfile-rails.4.2.x
   allow_failures:
     - rvm: ruby-head
