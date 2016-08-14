@@ -4,5 +4,5 @@ gem 'stateful_enum', path: '..'
 
 gem 'rails', '~> 5.0.0'
 gem 'sqlite3'
-gem 'minitest', '~> 5.0'
+gem 'test-unit-rails'
 gem 'ruby-graphviz'
