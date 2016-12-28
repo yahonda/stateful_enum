@@ -36,7 +36,7 @@ module StatefulEnum
           lines.push "#{final} --> [*]"
         end
 
-        File.write(File.join((ENV['DEST_DIR'] || Dir.pwd), "#{model.name}.puml"), lines.join("\n"))
+        File.write(File.join((ENV['DEST_DIR'] || Dir.pwd), "#{model.name}.puml"), lines.join("\n") << "\n")
       end
 
       def event(name, &block)
