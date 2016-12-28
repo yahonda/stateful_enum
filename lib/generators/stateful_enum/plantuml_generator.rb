@@ -5,7 +5,7 @@ require 'rails/generators/named_base'
 module StatefulEnum
   module Generators
     class PlantumlGenerator < ::Rails::Generators::NamedBase
-      desc 'PlantUML a state machine diagram'
+      desc 'Draws a PlantUML state machine diagram'
       def plantuml
         StatefulEnum::Machine.prepend StatefulEnum::PlantUML
         class_name.constantize
