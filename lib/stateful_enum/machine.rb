@@ -4,16 +4,12 @@ module StatefulEnum
   class Machine
     def initialize(model, column, states, prefix, suffix, &block)
       @model, @column, @states, @event_names = model, column, states, []
-      @prefix = if prefix == true
-                  "#{column}_"
-                elsif prefix
-                  "#{prefix}_"
-                end
-      @suffix = if suffix == true
-                  "_#{column}"
-                elsif suffix
-                  "_#{suffix}"
-                end
+      @prefix = if prefix
+        prefix == true ? "#{column}_" : "#{prefix}_"
+      end
+      @suffix = if suffix
+        suffix == true ? "_#{column}" : "_#{suffix}"
+      end
 
       # undef non-verb methods e.g. Model#active!
       states.each do |state|
