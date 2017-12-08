@@ -46,7 +46,7 @@ module StatefulEnum
 
     class EventStore < ::StatefulEnum::Machine::Event
       def initialize(items, states, prefix, suffix, name, &block)
-        @items, @states, @prefix, @suffix, @name = items, states, prefix, suffix, name
+        @items, @states, @prefix, @suffix, @name, @before, @after = items, states, prefix, suffix, name, [], []
 
         instance_eval(&block) if block
       end
