@@ -55,7 +55,7 @@ module StatefulEnum
               #TODO transaction?
               run_callbacks new_method_name do
                 original_method = self.class.send(:_enum_methods_module).instance_method "#{prefix}#{to}#{suffix}!"
-                ret = original_method.bind(self).call
+                original_method.bind(self).call
               end
             else
               false
