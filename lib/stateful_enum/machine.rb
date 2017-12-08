@@ -31,7 +31,7 @@ module StatefulEnum
 
     class Event
       def initialize(model, column, states, prefix, suffix, name, &block)
-        @states, @name, @transitions, @before, @after = states, name, {}, nil, nil
+        @states, @name, @transitions, @before, @after = states, name, {}, [], []
 
         instance_eval(&block) if block
 
@@ -42,16 +42,25 @@ module StatefulEnum
         model.class_eval do
           # def assign()
           detect_enum_conflict! column, new_method_name
+
+          # defining callbacks
+          define_callbacks new_method_name
+          before.each do |before_callback|
+            model.set_callback new_method_name, :before, before_callback
+          end
+          after.each do |after_callback|
+            model.set_callback new_method_name, :after, after_callback
+          end
+
           define_method new_method_name do
             to, condition = transitions[send(column).to_sym]
             #TODO better error
             if to && (!condition || instance_exec(&condition))
               #TODO transaction?
-              instance_eval(&before) if before
-              original_method = self.class.send(:_enum_methods_module).instance_method "#{prefix}#{to}#{suffix}!"
-              ret = original_method.bind(self).call
-              instance_eval(&after) if after
-              ret
+              run_callbacks new_method_name do
+                original_method = self.class.send(:_enum_methods_module).instance_method "#{prefix}#{to}#{suffix}!"
+                ret = original_method.bind(self).call
+              end
             else
               false
             end
@@ -100,11 +109,11 @@ module StatefulEnum
       end
 
       def before(&block)
-        @before = block
+        @before << block
       end
 
       def after(&block)
-        @after = block
+        @after << block
       end
     end
   end
